@@ -21,7 +21,7 @@
             </div>
         </div>
         <div style="margin:20rpx 20rpx 20rpx;border-radius:12rpx;overflow:hidden" v-if="active&&select.length!=1">
-            <p-btn text='溶氧数值警报' src="http://map.yujh.cn/img/icon.png" color="#ddd" :sw="true" @switch="swChange" :next="false" :bot="false"></p-btn>
+            <p-btn text='溶氧数值警报' src="http://map.yujh.cn/img/icon.png" color="#ddd" :sw="true" @switch="swChange" :uuu="S"  :next="false" :bot="false"></p-btn>
             <p-btn text='溶氧高位报警设置' src="http://map.yujh.cn/img/icon.png" color="white" @click="out('溶氧高位报警设置','up')" :count="num.up" :next="false" :bot="false"></p-btn>
             <p-btn text='溶氧低位报警设置' src="http://map.yujh.cn/img/icon.png" color="white" @click="out('溶氧低位位报警设置','down')" :count="num.down" :next="false" :bot="false"></p-btn>
             <p-btn text='历史溶氧走势表' src="http://map.yujh.cn/img/icon.png" color="white" @click="toBig"  :bot="false"></p-btn>
@@ -126,6 +126,7 @@ export default {
             return this
         },
         swChange(x){
+            console.log(x)
             this.S=x
             this.clearChoose()
             this.change++
@@ -148,12 +149,16 @@ export default {
                 this.now=x
             else
                 this.now=false
+            this.onBar=false
         },
         fullData(data){
             if(this.now)
                 this.num[this.now]=data
             this.show=false
+            this.clearChoose()
             this.change++
+            this.onBar=true
+            this.time()
         },
         initChart(canvas, width, height) {
             this.width=width
@@ -420,7 +425,7 @@ export default {
                                 return []
                             }
                         })(),
-                        markLine: this.active&&this.S?{
+                        markLine: this.S?{
                             silent: true,
                             animation:false,
                             data: [{
@@ -453,7 +458,7 @@ export default {
                                 return []
                             }
                         })(),
-                        markLine: this.active&&this.S?{
+                        markLine: this.S?{
                             silent: true,
                             animation:false,
                             data: [{
@@ -486,7 +491,7 @@ export default {
                                 return []
                             }
                         })(),
-                        markLine: this.active&&this.S?{
+                        markLine: this.S?{
                             silent: true,
                             animation:false,
                             data: [{
@@ -519,7 +524,7 @@ export default {
                                 return []
                             }
                         })(),
-                        markLine: this.active&&this.S?{
+                        markLine: this.S?{
                             silent: true,
                             animation:false,
                             data: [{
@@ -567,7 +572,7 @@ export default {
                                 return []
                             }
                         })(),
-                        markLine: this.active&&this.S?{
+                        markLine: this.S?{
                             silent: true,
                             animation:false,
                             data: [{

@@ -4,7 +4,7 @@
         <span class="text">{{text}}</span>
         <i class="next" v-if="next&&!sw"></i>
         <div class="rText" v-if="!next&&!sw">{{count}}</div>
-        <i-switch class="S" :value="S" @change="changeS" v-if="sw"></i-switch>
+        <i-switch class="S" :value="uuu" @change="changeS" v-if="sw"></i-switch>
         <i class="bot" v-if="bot"></i>
     </div>
 </template>
@@ -37,6 +37,10 @@ export default {
         sw:{
             type:Boolean,
             default:false
+        },
+        uuu:{
+            type:Boolean,
+            default:true
         }
     },
     methods:{
@@ -45,13 +49,13 @@ export default {
         },
         changeS(e){
             console.log(e)
-            this.S=e.mp.detail.value
-            this.$emit('switch',this.S)
+            this.uuu=e.mp.detail.value
+            this.$emit('switch',this.uuu)
         }
     },
     data(){
         return{
-            S:true
+            
         }
     }
 }
