@@ -66,6 +66,10 @@
     color:white;
     background:rgb(240, 111, 111)
 }
+.upWarning{
+    color:white;
+    background:rgb(247, 165, 59)
+}
 ::-webkit-scrollbar {
     display:none
 }

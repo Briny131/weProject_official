@@ -1,9 +1,9 @@
 <template>
     <div class="body" @click="Click">
         <i-row i-class="height" >
-            <i-col :span="6" :i-class="data.warningStatus?'height warning':'height green'" >
+            <i-col :span="6" :i-class="data.warningStatus?data.warningStatus==1?'height warning':'height upWarning':'height green'" >
                 <div :class="data.warningStatus?'left1':'left'" >
-                    <div class="left_data">{{data.paramOxygen}}<span v-if="data.warningStatus" class="left_icon"></span></div>
+                    <div class="left_data">{{data.paramOxygen}}<span v-if="data.warningStatus" :class="data.warningStatus==1?'left_icon':'left_icon1'"></span></div>
                     <div class="left_tem">{{data.paramTemp}}<span>℃</span></div>
                 </div>
             </i-col>
@@ -120,6 +120,26 @@ export default {
     right:10rpx;
 }
 .left_icon:after {
+	content:"";
+	position:absolute;
+    height:10rpx;
+    width:10rpx;
+    border-top:4rpx solid;
+    border-right:4rpx solid;
+    right:4rpx;
+    top:4rpx;
+}
+.left_icon1 {
+	position:absolute;
+    height:8rpx;
+    width:8rpx;
+    border-top:4rpx solid white;
+    border-right:4rpx solid white;
+    transform:rotate(135deg);
+    top:50%;
+    right:10rpx;
+}
+.left_icon1:after {
 	content:"";
 	position:absolute;
     height:10rpx;

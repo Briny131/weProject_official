@@ -32,8 +32,8 @@
     },{
       "pagePath":"pages/mark/main",
       "text":"发帖",
-      "iconPath":"static/img/mark.png",
-      "selectedIconPath":"static/img/mark.png"
+      "iconPath":"static/img/talk.png",
+      "selectedIconPath":"static/img/talk_choose.png"
     },{
       "pagePath":"pages/me/main",
       "text":"我的",

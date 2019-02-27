@@ -11,7 +11,7 @@
 	"compileType": "miniprogram",
 	"appid": "wx08e20325e2e2652d",
 	"projectname": "second",
-	"libVersion": "2.5.1",
+	"libVersion": "2.6.1",
 	"condition": {
 		"search": {
 			"current": -1,

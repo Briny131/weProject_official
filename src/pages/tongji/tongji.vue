@@ -623,16 +623,47 @@ export default {
         this.week=[]
         this.data=[]
         this.data1=[]
+        let head
         for(let i=4;i>=0;i--){
             d=new Date()
             d.setDate(d.getDate()-i)
+            if(i==4){
+                let month=d.getMonth()+1
+                head=d.getFullYear()+'-'+month+'-'+d.getDate()+' 00:00:00'
+            }
             let day=d.getDate()>=10?d.getDate():'0'+d.getDate(),month=d.getMonth()+1>=10?d.getMonth()+1:'0'+(d.getMonth()+1)
             this.week.push(`${month}-${day}`)
         }
         this.$fetch.getDaily({sid:data.id}).then(resp=>{
+            head=new Date(head).valueOf()/1000
+
+            let component=[],j=0,NewArray=[]
+            for(let i=0;i<(96*5);i++){
+                component.push(head+i*900)
+            }
+            for(let i=0;i<component.length;i++){
+                if(component[i]==resp.data.data[j].createTime){
+                    NewArray.push(resp.data.data[j])
+                    if(j+1!=resp.data.data.length) j++
+                }else{
+                    NewArray.push({createTime:component[i],paramOxygen:0,paramTemp:0})
+                }
+            }
+            for(let i=0;i<NewArray.length;i++){
+                if(NewArray[i].paramOxygen==0&&i>0&&i<NewArray.length-1&&NewArray[i-1].paramOxygen&&NewArray[i+1].paramOxygen){
+                    NewArray[i].paramOxygen=(+(NewArray[i-1].paramOxygen)+(+NewArray[i+1].paramOxygen))/2+''
+                }
+                if(NewArray[i].paramTemp==0&&i>0&&i<NewArray.length-1&&NewArray[i-1].paramTemp&&NewArray[i+1].paramTemp){
+                    NewArray[i].paramTemp=(+(NewArray[i-1].paramTemp)+(+NewArray[i+1].paramTemp))/2+''
+                }
+            }
+            console.log(NewArray)
+            resp.data.data=NewArray
             for(let i in this.week){
-                if(i==4)
+                if(i==4){
                     this.input[this.week[i]]=true
+                    head=d.getFullYear()+'-'+d.getMonth()+1+'-'+d.getDate()+' 00:00:00'
+                }
                 else
                     this.input[this.week[i]]=false
                 

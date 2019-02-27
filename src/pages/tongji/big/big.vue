@@ -274,8 +274,6 @@ export default {
             let day=d.getDate()>=10?d.getDate():'0'+d.getDate(),month=d.getMonth()+1>=10?d.getMonth()+1:'0'+(d.getMonth()+1)
             this.week.push(`${month}-${day}`)
         }
-        
-        console.log('hhhh')
         this.$fetch.getThird({sid:this.id.id}).then(resp=>{
             head=new Date(head).valueOf()/1000
             let component=[],j=0,NewArray=[]
