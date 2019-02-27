@@ -7,7 +7,7 @@ import '../static/weui.css'
 import './utils/ceshi'
 import ceshi from './utils/ceshi'
 
-const { $Toast } = require('./components/dist/base/index');
+const { $Toast } = require('./components/dist1/base/index');
 var Fly=require("flyio/dist/npm/wx")
 var fly=new Fly
 Vue.prototype.$store=store;
