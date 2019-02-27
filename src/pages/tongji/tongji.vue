@@ -651,19 +651,25 @@ export default {
                     NewArray.push(resp.data.data[j])
                     if(j+1!=resp.data.data.length) j++
                 }else{
-                    NewArray.push({createTime:component[i],paramOxygen:0,paramTemp:0})
+                    NewArray.push({createTime:component[i],paramOxygen:'0',paramTemp:'0'})
                 }
             }
-            for(let i=0;i<NewArray.length;i++){
-                if(NewArray[i].paramOxygen==0&&i>0&&i<NewArray.length-1&&NewArray[i-1].paramOxygen&&NewArray[i+1].paramOxygen){
-                    NewArray[i].paramOxygen=(+(NewArray[i-1].paramOxygen)+(+NewArray[i+1].paramOxygen))/2+''
-                }
-                if(NewArray[i].paramTemp==0&&i>0&&i<NewArray.length-1&&NewArray[i-1].paramTemp&&NewArray[i+1].paramTemp){
-                    NewArray[i].paramTemp=(+(NewArray[i-1].paramTemp)+(+NewArray[i+1].paramTemp))/2+''
+            resp.data.data=[]
+            for(let k=4;k>=0;k--){
+                for(let i=k*96;i<k*96+96;i++){
+                    resp.data.data.push(NewArray[i])
                 }
             }
-            console.log(NewArray)
-            resp.data.data=NewArray
+            for(let i=0;i<resp.data.data.length;i++){
+                if(resp.data.data[i].paramOxygen==0&&i>0&&i<resp.data.data.length-1&&resp.data.data[i-1].paramOxygen&&resp.data.data[i+1].paramOxygen){
+                    resp.data.data[i].paramOxygen=((+(resp.data.data[i-1].paramOxygen)+(+resp.data.data[i+1].paramOxygen))/2).toFixed(1)+''
+                }
+                if(resp.data.data[i].paramTemp==0&&i>0&&i<resp.data.data.length-1&&resp.data.data[i-1].paramTemp&&resp.data.data[i+1].paramTemp){
+                    resp.data.data[i].paramTemp=((+(resp.data.data[i-1].paramTemp)+(+resp.data.data[i+1].paramTemp))/2).toFixed(1)+''
+                }
+            }
+            console.log(resp.data.data)
+            // resp.data.data=NewArray
             for(let i in this.week){
                 if(i==4){
                     this.input[this.week[i]]=true
