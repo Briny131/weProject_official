@@ -15,9 +15,9 @@
                 </div>
             </div>
         </div>
-        <div style="height:40%;position:relative">
+        <div style="height:40%;position:relative" >
             <div style="height:100%;margin-top:50rpx"  >
-                <mpvue-echarts :echarts="echarts"  :onInit="onInit" :change="change" canvasId="demo-canvas" />
+                <mpvue-echarts v-if="!show" :echarts="echarts"  :onInit="onInit" :change="change" canvasId="demo-canvas" />
             </div>
         </div>
         <div style="margin:20rpx 20rpx 20rpx;border-radius:12rpx;overflow:hidden" v-if="active&&select.length!=1">
@@ -91,12 +91,6 @@ export default {
             return this.$store.state.select
         }
     },
-    // watch:{
-    //     select:function(){
-    //         console.log(this,'watch')
-    //         this.jisuan()
-    //     }
-    // },
     methods:{
         clearChoose(){
             this.$store.state.select=[]
@@ -219,9 +213,6 @@ export default {
                     itemGap: 3,
                     itemWidth: 0,
                     itemHeight: 0,
-                    // padding: [10, 10],
-                    // type:'scroll',
-                    // inactiveColor:'#aaa',
                     data:[{
                         name:this.week[0],
                         icon:'circle',
@@ -378,39 +369,7 @@ export default {
                             color:'rgba(255,255,255,0.2)'
                         }
                     },
-                    // splitNumber:3,
-                    // // interval:{
-                    // //     min:2,max:12
-                    // // },
-                    // splitArea:{
-                    //     areaStyle:{
-                    //         color:['rgb(116,227,121)','rgb(201,227,116)','rgb(250,155,157)']
-                    //     },
-                    //     show:true
-                    // }
                 },
-                // visualMap: {
-                //     show:false,
-                //     type:'piecewise',
-                //     pieces: [
-                //     //     {
-                //     //     gt: 0,
-                //     //     lte:1,
-                //     //     color: '#096'
-                //     // }, {
-                //     //     gt: 1,
-                //     //     lte: 2,
-                //     //     color: '#ffde33'
-                //     // }, 
-                //     {
-                //         gt: 2,
-                //         lte: 3,
-                //         color: '#ff9933'
-                //     }],
-                //     outOfRange: {
-                //         color: 'red'
-                //     }
-                // },
                 series :[
                     {
                         name:this.week[0],
@@ -425,7 +384,7 @@ export default {
                                 return []
                             }
                         })(),
-                        markLine: this.S?{
+                        markLine: this.S&&this.active?{
                             silent: true,
                             animation:false,
                             data: [{
@@ -458,7 +417,7 @@ export default {
                                 return []
                             }
                         })(),
-                        markLine: this.S?{
+                        markLine: this.S&&this.active?{
                             silent: true,
                             animation:false,
                             data: [{
@@ -491,7 +450,7 @@ export default {
                                 return []
                             }
                         })(),
-                        markLine: this.S?{
+                        markLine: this.S&&this.active?{
                             silent: true,
                             animation:false,
                             data: [{
@@ -524,7 +483,7 @@ export default {
                                 return []
                             }
                         })(),
-                        markLine: this.S?{
+                        markLine: this.S&&this.active?{
                             silent: true,
                             animation:false,
                             data: [{
@@ -549,21 +508,6 @@ export default {
                         type:'line',
                         smooth:true,
                         symbol:'none',
-                        // areaStyle:{
-                        //     // color:'rgba(255,255,255,0.1)'
-                        //     color:{
-                        //         type: 'linear',
-                        //         x: 0,
-                        //         y: 0,
-                        //         x2: 0,
-                        //         y2: 1,
-                        //         colorStops: [{
-                        //             offset: 0, color: 'rgba(255,255,255,0.1)' // 0% 处的颜色
-                        //         }, {
-                        //             offset: 1, color: 'rgba(255,255,255,0)' // 100% 处的颜色
-                        //         }]
-                        //     }
-                        // },
                         data:(()=>{
                             try{
                                 return this.data2[4].data
@@ -572,7 +516,7 @@ export default {
                                 return []
                             }
                         })(),
-                        markLine: this.S?{
+                        markLine: this.S&&this.active?{
                             silent: true,
                             animation:false,
                             data: [{
@@ -668,8 +612,6 @@ export default {
                     resp.data.data[i].paramTemp=((+(resp.data.data[i-1].paramTemp)+(+resp.data.data[i+1].paramTemp))/2).toFixed(1)+''
                 }
             }
-            console.log(resp.data.data)
-            // resp.data.data=NewArray
             for(let i in this.week){
                 if(i==4){
                     this.input[this.week[i]]=true
@@ -688,16 +630,6 @@ export default {
             this.jisuan().time()
         }).catch(error=>{
         })
-        // for(let i in this.week){
-        //     if(i==4)
-        //         this.input[this.week[i]]=true
-        //     else
-        //         this.input[this.week[i]]=false
-            
-        //     this.data.unshift({name:this.week[i],data:new Array(96).fill('').map(function(value,index){return 1})})
-        //     this.data1.unshift({name:this.week[i],data:[2,1,13,1,2,1,3,2,12,15,2,3,3,15,2,3,3,1,15,2,3,3,1,15,21,3,3,2,1,25,3,3,1]})
-        // }
-        // this.data2=this.data1
     },
     onUnload:function(){
         this.onBar=false
