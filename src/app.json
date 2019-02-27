@@ -1,0 +1,56 @@
+{
+  "pages": [
+    "pages/me/res/main",
+    "pages/tongji/big/main",
+    "pages/tongji/main",
+    "pages/tip/useless/main",
+    "pages/me/main",
+    "pages/index/main",
+    "pages/mark/main",
+    "pages/me/baseMsg/main",
+    "pages/tip/main",
+    "pages/tongji/seeContent/main",
+    "pages/tongji/writeMark/main"
+  ],
+  "disableScroll": true,
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationStyle":"custom"
+  },
+  "tabBar":{
+      "selectedColor":"#51cc99",
+      "list":[{
+      "pagePath":"pages/index/main",
+      "text":"塘口",
+      "iconPath":"static/img/tangkou.png",
+      "selectedIconPath":"static/img/tangkou1.png"
+    },{
+      "pagePath":"pages/tip/main",
+      "text":"按钮",
+      "iconPath":"static/img/tangkou.png",
+      "selectedIconPath":"static/img/tangkou1.png"
+    },{
+      "pagePath":"pages/mark/main",
+      "text":"发帖",
+      "iconPath":"static/img/mark.png",
+      "selectedIconPath":"static/img/mark.png"
+    },{
+      "pagePath":"pages/me/main",
+      "text":"我的",
+      "iconPath":"static/img/me.png",
+      "selectedIconPath":"static/img/me1.png"
+    }]
+  },
+  "usingComponents":{
+    "i-button":"./components/dist/button/index",
+    "i-row": "./components/dist/row/index",
+    "i-col": "./components/dist/col/index",
+    "i-avatar":"./components/dist/avatar/index",
+    "i-input":"./components/dist/input/index",
+    "i-panel":"./components/dist/panel/index",
+    "i-cell-group":"./components/dist/cell-group/index",
+    "i-cell":"./components/dist/cell/index",
+    "i-toast":"./components/dist/toast/index",
+    "i-switch": "./components/dist/switch/index"
+  }
+}
